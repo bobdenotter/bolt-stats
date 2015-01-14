@@ -1,0 +1,13 @@
+{% include '_header.twig' %}
+
+
+<h1>{{title}}</h1>
+
+<h2>New installs</h2>
+<iframe src="./chart" width="800" height="300" frameborder="0" scrolling="no"></iframe>
+
+<h2>Total installs</h2>
+<iframe src="./chart?total=true" width="800" height="300" frameborder="0" scrolling="no"></iframe>
+
+
+{% include '_footer.twig' %}

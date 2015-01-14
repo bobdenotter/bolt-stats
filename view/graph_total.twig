@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./view/css/normalize.css" />  
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Total Installs'],
+{% for row in rows %}
+    [ '{{ row.month }}', {{ row.totalinstalls }}  ]{% if not loop.last %}, {% endif %}
+
+{% endfor %}
+        ]);
+
+        var options = {
+            title: 'Total Bolt Installs',
+            chartArea:{left:40,top:5,width:"94%",height:"75%"},
+            colors:['#193', '#062', "#900", "#33C",'#7A9'],
+            fontSize: 10,
+            hAxis: {
+                maxTextLines: 1,
+                slantedText: true,
+                slantedTextAngle: 45
+            },
+            // vAxis: {
+            //   minValue: { { server.range.0 }},
+            //   maxValue: { { server.range.1 }},
+            //   viewWindow: { max: { { server.range.1 * 1.5 }}  }
+            // },
+            legend: {
+                position: 'none'
+            },
+            areaOpacity: 0.2,
+            series: {
+              0: { areaOpacity: 0.1, lineWidth: 1 },
+              1: { areaOpacity: 0.1, lineWidth: 1 },
+              3: { areaOpacity: 0, lineWidth: 1 },
+              4: { areaOpacity: 0, lineWidth: 1 }
+            }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%; height: 100%;"></div>
+  </body>
+</html>

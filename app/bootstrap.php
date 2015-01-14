@@ -4,6 +4,12 @@ $app = new Silex\Application();
 
 $app['debug'] = true;
 
+$yaml = new Symfony\Component\Yaml\Parser();
+
+$app['config'] = $yaml->parse(file_get_contents(__DIR__ . '/config.yml'));
+
+// dump($app['config']);
+
 $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -20,10 +26,10 @@ $app['twig']->addExtension(new Twig_Extension_Debug());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options'            => array(
         'driver'    => 'pdo_mysql',
-        'host'      => $config['db_host'],
-        'dbname'    => $config['db_dbname'],
-        'user'      => $config['db_user'],
-        'password'  => $config['db_password'],
+        'host'      => $app['config']['database']['host'],
+        'dbname'    => $app['config']['database']['databasename'],
+        'user'      => $app['config']['database']['user'],
+        'password'  => $app['config']['database']['password'],
     )
 ));
 

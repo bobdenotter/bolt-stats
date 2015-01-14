@@ -2,8 +2,10 @@
     "name": "bobdenotter/silex-bootstrap",
     "require": {
         "silex/silex": "dev-master",
-        "doctrine/dbal": "2.2.*",
-        "monolog/monolog": ">=1.0.0",
-        "twig/twig": ">=1.8,<2.0-dev"
+        "doctrine/dbal": "~2.2",
+        "monolog/monolog": "~1.0",
+        "twig/twig": "~1.16",
+        "symfony/yaml": "~2.6",
+        "symfony/var-dumper": "~2.6"
     }
 }
